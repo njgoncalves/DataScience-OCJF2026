@@ -1,2 +1,2 @@
 # DataScience-OCJF2026
-Açao da Ciência Viva - OCJF2026
+Ação da Ciência Viva - OCJF2026
