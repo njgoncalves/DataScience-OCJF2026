@@ -1,0 +1,125 @@
+---
+title: "Sessão 5.1: Introdução à Gramática dos Gráficos com ggplot2"
+author: Norberto Jorge Gonçalves
+date: "6 de Julho de 2025"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_depth: 3
+    toc_float: true
+---
+
+# 1. Introdução à Gramática dos Gráficos com `ggplot2`
+
+O `ggplot2` é o pacote mais popular e poderoso para criar gráficos em R. Ele baseia-se na "Gramática dos Gráficos", uma filosofia que decompõe os gráficos em componentes lógicos, tornando-os consistentes e fáceis de construir.
+
+## 1.1. Instalar e Carregar o `ggplot2`
+
+Primeiro, precisamos de instalar o pacote (apenas uma vez no vosso computador) e depois carregá-lo em cada nova sessão R que o vamos usar.
+
+```{r eval=FALSE}
+# Instalem o pacote ggplot2 (descomentem a linha e executem-na)
+# install.packages("ggplot2")
+```
+
+```{r}
+# Carreguem o pacote ggplot2
+library(ggplot2)
+```
+
+## 1.2. Os Componentes Essenciais de um Gráfico ggplot2
+Um gráfico ggplot2 é construído adicionando "camadas" usando o operador +. Os três componentes essenciais são:
+
+1.	Dados (data): O data frame que contém as variáveis que queremos visualizar.
+2.	Mapeamentos Estéticos (aes - aesthetics): Como as variáveis dos dados são mapeadas para as propriedades visuais do gráfico (eixos X e Y, cor, tamanho, forma, etc.).
+3.	Geometrias (geom_): O tipo de marcação geométrica que queremos usar para representar os dados (pontos, barras, linhas, caixas, etc.).
+
+Vamos usar o dataset iris para demonstrar.
+```{R}
+data(iris)
+head(iris)
+```
+
+###1.2.1. Componente 1: Dados (data)
+Começamos um gráfico ggplot2 com a função ggplot(), passando o data frame como argumento.
+
+```{R}
+# Apenas inicializa o gráfico, não mostra nada ainda
+ggplot(data = iris)
+```
+
+### 1.2.2. Componente 2: Mapeamentos Estéticos (aes())
+Dentro de aes(), especificamos quais variáveis do nosso data frame serão mapeadas para as propriedades visuais.
+
+* x: Variável para o eixo X.
+* y: Variável para o eixo Y.
+* color: Variável para mapear a cor.
+* size: Variável para mapear o tamanho.
+* shape: Variável para mapear a forma dos pontos.
+* alpha: Variável para mapear a transparência.
+
+```{R}
+# Mapear Sepal.Length para o eixo X e Sepal.Width para o eixo Y
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
+```
+
+Ainda não vemos nada porque não dissemos ao ggplot2 como desenhar os dados.
+
+### 1.2.3. Componente 3: Geometrias (geom_)
+As funções geom_ definem como os dados serão desenhados. Cada geom_ corresponde a um tipo de gráfico (e.g., geom_point() para gráficos de dispersão, geom_bar() para gráficos de barras).
+Adicionamos as geometrias usando o operador +.
+```{R}
+# Gráfico de dispersão: Sepal.Length vs Sepal.Width
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point()
+```
+
+## 1.3. Adicionar Mais Estéticas
+Podemos mapear outras variáveis para estéticas adicionais.
+
+```{R}
+# Mapear a cor dos pontos à variável Species
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point()
+```
+
+Agora, cada espécie tem uma cor diferente, o que nos ajuda a ver padrões.
+
+## 1.4. Camadas Adicionais (+)
+Podemos adicionar múltiplas camadas a um gráfico. Por exemplo, podemos adicionar uma linha de suavização.
+```{R}
+# Adicionar uma linha de suavização (regressão) ao gráfico
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) # method="lm" para linha de regressão linear, se=FALSE remove a área de confiança
+```
+
+## 1.5. Personalização: Títulos e Rótulos
+Podemos adicionar títulos, subtítulos e rótulos aos eixos usando a função labs().
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  labs(
+    title = "Comprimento vs Largura da Sépala por Espécie de Iris",
+    subtitle = "Análise de Dados do Dataset Iris",
+    x = "Comprimento da Sépala (cm)",
+    y = "Largura da Sépala (cm)",
+    color = "Espécie da Flor" # Rótulo para a legenda de cor
+  )
+```
+
+## 1.6. Salvar um Gráfico
+Para salvar o gráfico, podemos atribuí-lo a um objeto e depois usar ggsave().
+```{r}
+meu_primeiro_grafico <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  labs(title = "Comprimento vs Largura da Sépala da Sépala")
+
+# Salvar como PNG
+# ggsave("meu_grafico_iris.png", plot = meu_primeiro_grafico, width = 8, height = 6, dpi = 300)
+# Salvar como PDF
+# ggsave("meu_grafico_iris.pdf", plot = meu_primeiro_grafico, width = 8, height = 6)
+```
+________________________________________
+**Parabéns!** Já conhecem os fundamentos da gramática dos gráficos com ggplot2!

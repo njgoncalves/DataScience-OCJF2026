@@ -1,0 +1,146 @@
+---
+title: 'Sessão 3.1: O Pacote dplyr para Manipulação de Dados'
+author: "Norberto Jorge Gonçalves"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. O Pacote `dplyr`: A Ferramenta Essencial para Manipulação de Dados
+
+O `dplyr` é um pacote do R que faz parte do "tidyverse", uma coleção de pacotes desenhados para a ciência de dados. Ele oferece um conjunto de funções (chamadas "verbos") que tornam a manipulação de data frames muito mais intuitiva e eficiente.
+
+## 1.1. Instalar e Carregar o `dplyr`
+
+Primeiro, precisamos de instalar o pacote (apenas uma vez no vosso computador) e depois carregá-lo em cada nova sessão R que o vamos usar.
+
+```{r eval=FALSE}
+# Instalem o pacote dplyr (descomentem a linha e executem-na)
+# install.packages("dplyr")
+```
+```{r}
+# Carreguem o pacote dplyr
+library(dplyr)
+```
+## 1.2. O Operador Pipe (%>%)
+O dplyr é frequentemente usado com o operador "pipe" (`%>%`). Este operador permite "encadear" operações, tornando o código mais legível. Pensem nele como "e depois".
+Em vez de: `resultado <- funcao2(funcao1(dados))` Com o pipe: `resultado <- dados %>% funcao1() %>% funcao2()`
+Para criar o pipe no RStudio, usem `Ctrl + Shift + M` (Windows/Linux) ou `Cmd + Shift + M` (Mac).
+## 1.3. Verbos Principais do dplyr
+Vamos usar o dataset iris para demonstrar os verbos.
+```{r}
+data(iris)
+head(iris)
+```
+### 1.3.1. select(): Selecionar Colunas
+A função select() permite escolher colunas pelo nome.
+
+```{r}
+# Selecionar apenas as colunas Sepal.Length e Species
+iris_selecionado <- iris %>%
+  select(Sepal.Length, Species)
+head(iris_selecionado)
+
+# Selecionar todas as colunas EXCETO Petal.Width
+iris_sem_petal_width <- iris %>%
+  select(-Petal.Width)
+head(iris_sem_petal_width)
+
+# Selecionar colunas que começam com "Sepal"
+iris_sepal <- iris %>%
+  select(starts_with("Sepal"))
+head(iris_sepal)
+```
+### 1.3.2. filter(): Filtrar Linhas
+A função filter() permite selecionar linhas com base em condições lógicas. É semelhante à seleção de linhas com [] que vimos na Sessão 2, mas mais legível.
+
+```{r}
+# Filtrar flores da espécie "virginica"
+iris_virginica <- iris %>%
+  filter(Species == "virginica")
+head(iris_virginica)
+nrow(iris_virginica)
+
+# Filtrar flores com Sepal.Length maior que 7
+iris_sepal_longo <- iris %>%
+  filter(Sepal.Length > 7.0)
+head(iris_sepal_longo)
+
+# Filtrar flores da espécie "setosa" E com Petal.Width menor que 0.3
+iris_setosa_pequena <- iris %>%
+  filter(Species == "setosa" & Petal.Width < 0.3)
+head(iris_setosa_pequena)
+
+# Filtrar flores da espécie "setosa" OU "versicolor"
+iris_setosa_versicolor <- iris %>%
+  filter(Species %in% c("setosa", "versicolor"))
+head(iris_setosa_versicolor)
+nrow(iris_setosa_versicolor)
+```
+
+### 1.3.3. mutate(): Criar/Modificar Colunas
+A função mutate() permite criar novas colunas ou modificar colunas existentes.
+
+```{r}
+# Criar uma nova coluna 'Sepal.Area' (Length * Width)
+iris_com_area <- iris %>%
+  mutate(Sepal.Area = Sepal.Length * Sepal.Width)
+head(iris_com_area)
+
+# Criar uma coluna categórica 'Sepal.Length.Category'
+iris_com_categoria <- iris %>%
+  mutate(Sepal.Length.Category = ifelse(Sepal.Length > 6, "Longo", "Curto"))
+head(iris_com_categoria)
+```
+
+### 1.3.4. arrange(): Ordenar Linhas
+A função arrange() permite ordenar as linhas do data frame com base nos valores de uma ou mais colunas.
+
+```{r}
+# Ordenar por Sepal.Length em ordem crescente (padrão)
+iris_ordenado_asc <- iris %>%
+  arrange(Sepal.Length)
+head(iris_ordenado_asc)
+
+# Ordenar por Sepal.Length em ordem decrescente
+iris_ordenado_desc <- iris %>%
+  arrange(desc(Sepal.Length))
+head(iris_ordenado_desc)
+
+# Ordenar por Species (crescente) e depois por Sepal.Length (decrescente)
+iris_ordenado_multi <- iris %>%
+  arrange(Species, desc(Sepal.Length))
+head(iris_ordenado_multi)
+```
+
+### 1.3.5. group_by() e summarise(): Agrupar e Resumir Dados
+Estas duas funções são usadas em conjunto para realizar análises por grupo.
+* group_by(): Agrupa o data frame por uma ou mais colunas.
+*	summarise(): Calcula estatísticas de resumo para cada grupo.
+
+```{r}
+# Calcular a média do Sepal.Length por espécie
+media_sepal_por_especie <- iris %>%
+  group_by(Species) %>%
+  summarise(Media_Sepal.Length = mean(Sepal.Length))
+print(media_sepal_por_especie)
+
+# Calcular a média e o desvio padrão do Petal.Width por espécie
+resumo_petala_por_especie <- iris %>%
+  group_by(Species) %>%
+  summarise(
+    Media_Petal.Width = mean(Petal.Width),
+    DesvioPadrao_Petal.Width = sd(Petal.Width),
+    Numero_Observacoes = n() # n() conta o número de observações no grupo
+  )
+print(resumo_petala_por_especie)
+```
+
+**Parabéns!** Acabaram de aprender os verbos mais importantes do dplyr!

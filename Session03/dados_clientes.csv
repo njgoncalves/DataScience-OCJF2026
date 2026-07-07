@@ -1,0 +1,11 @@
+"ID_Cliente","Nome","Idade","Rendimento_Mensal","Genero","Cidade","Compras_Ultimos_6_Meses"
+1001,"Alice",25,1500,"F","Lisboa",5
+1002,"Bernardo",30,2200,"M","Porto",8
+1003,"Carla",NA,1800,"F","Coimbra",3
+1004,"Diogo",22,1400,"M","Braga",10
+1005,"Eva",35,NA,"F","Lisboa",6
+1006,"Filipe",28,2500,"M","Porto",7
+1007,"Gabriela",NA,1900,"F","Coimbra",4
+1008,"Hugo",40,3000,"M","Braga",12
+1009,"Inês",27,NA,"F","Lisboa",9
+1010,"Joana",33,2100,"M","Porto",5

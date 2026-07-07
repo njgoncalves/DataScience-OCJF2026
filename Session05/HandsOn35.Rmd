@@ -1,0 +1,118 @@
+---
+title: 'Sessão 5.3: Boxplots para Visualização de Distribuição e Outliers'
+author: "Norberto Jorge Gonçalves"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Boxplots para Visualização de Distribuição e Outliers
+Os boxplots (diagramas de caixa e bigodes) são gráficos muito úteis para visualizar a distribuição de uma variável numérica e identificar outliers, especialmente quando se compara a distribuição entre diferentes grupos categóricos.
+
+## 1.1. O que um Boxplot nos Mostra?
+
+Um boxplot resume a distribuição de uma variável numérica usando cinco números principais:
+
+* Linha do Meio da Caixa: Mediana (Q2 - 50º percentil).
+* Fundo da Caixa: Primeiro Quartil (Q1 - 25º percentil).
+* Topo da Caixa: Terceiro Quartil (Q3 - 75º percentil).
+* Comprimento da Caixa: Intervalo Interquartil (IQR = Q3 - Q1).
+* Bigodes (Whiskers): Estendem-se até 1.5timesIQR do Q1 e Q3, ou até o valor mais extremo dentro desse limite.
+* Pontos Fora dos Bigodes: São considerados outliers (valores extremos).
+Vamos usar o dataset iris para demonstrar.
+
+```{r}
+library(ggplot2)
+data(iris)
+head(iris)
+```
+
+## 1.2. Criar um Boxplot Simples (geom_boxplot())
+
+Para criar um boxplot de uma única variável numérica, podemos mapear essa variável ao eixo Y e deixar o eixo X vazio (ou mapeá-lo a uma constante).
+
+```{r}
+ggplot(data = iris, aes(y = Sepal.Length)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(
+    title = "Boxplot do Comprimento da Sépala",
+    y = "Comprimento da Sépala (cm)"
+  )
+```
+
+## 1.3. Boxplots por Grupo Categórico
+A maior utilidade dos boxplots é comparar a distribuição de uma variável numérica entre diferentes categorias. Mapeamos a variável categórica ao eixo X e a numérica ao eixo Y.
+Exemplo: Sepal.Length por Species no iris
+
+```{r}
+ggplot(data = iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  labs(
+    title = "Comprimento da Sépala por Espécie de Iris",
+    x = "Espécie da Flor",
+    y = "Comprimento da Sépala (cm)",
+    fill = "Espécie"
+  )
+```
+
+Interpretação:
+
+* Podemos ver claramente que a espécie "setosa" tem sépalas mais curtas e menos variabilidade.
+* "virginica" tem sépalas mais longas.
+* Podemos identificar outliers (pontos individuais) em "versicolor" e "virginica".
+
+Exemplo: mpg por cyl no mtcars
+
+```{r}
+data(mtcars)
+# Converter cyl para fator para que o ggplot2 a trate como categórica
+mtcars$cyl_factor <- as.factor(mtcars$cyl)
+
+ggplot(data = mtcars, aes(x = cyl_factor, y = mpg, fill = cyl_factor)) +
+  geom_boxplot() +
+  labs(
+    title = "MPG por Número de Cilindros",
+    x = "Número de Cilindros",
+    y = "Milhas por Galão (MPG)",
+    fill = "Cilindros"
+  )
+```
+
+## 1.4. Adicionar Pontos aos Boxplots (geom_jitter())
+Para ver a distribuição exata dos pontos e a sobreposição, podemos adicionar geom_jitter() (pontos com um pequeno "ruído" para evitar sobreposição) aos boxplots.
+
+```{r}
+ggplot(data = iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot(alpha = 0.7) + # Transparência para ver os pontos por baixo
+  geom_jitter(width = 0.2, alpha = 0.5, color = "darkred") + # width controla a dispersão horizontal dos pontos
+  labs(
+    title = "Comprimento da Sépala por Espécie com Pontos",
+    x = "Espécie da Flor",
+    y = "Comprimento da Sépala (cm)",
+    fill = "Espécie"
+  )
+```
+
+## 1.5. Inverter Eixos
+Às vezes, é mais fácil ler os rótulos se os eixos forem invertidos.
+
+```{r}
+ggplot(data = iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  coord_flip() + # Inverte os eixos
+  labs(
+    title = "Comprimento da Sépala por Espécie de Iris (Eixos Invertidos)",
+    y = "Espécie da Flor", # Y agora é a categoria
+    x = "Comprimento da Sépala (cm)", # X agora é o valor numérico
+    fill = "Espécie"
+  )
+```
+________________________________________
+*Parabéns!* Já dominam a criação e interpretação de boxplots!

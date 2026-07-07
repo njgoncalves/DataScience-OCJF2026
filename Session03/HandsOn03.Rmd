@@ -1,0 +1,39 @@
+---
+title: 'Sessão 3.3: Exploração Inicial dos Dados (Recap)'
+author: "Os vossos formadores"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Exploração Inicial dos Dados (Recap)
+Depois de importar os dados, é crucial fazer uma primeira inspeção para entender a sua estrutura e conteúdo. Vamos usar o dataset mtcars (incorporado no R) para demonstrar.
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+## 1.1. Funções Essenciais
+* head(dataset): Vê as primeiras 6 linhas.
+* tail(dataset): Vê as últimas 6 linhas.
+* str(dataset): Mostra a estrutura interna (tipos de dados, número de linhas/colunas).
+* summary(dataset): Fornece um resumo estatístico para cada coluna.
+* dim(dataset): Retorna o número de linhas e colunas.
+* colnames(dataset) / names(dataset): Lista os nomes das colunas.
+* nrow(dataset) / ncol(dataset): Retorna o número de linhas/colunas.
+```{r}
+# Exemplos rápidos
+head(mtcars, n = 3)
+str(mtcars)
+summary(mtcars)
+dim(mtcars)
+colnames(mtcars)
+```
+*Lembrem-se:* A exploração inicial é como "conhecer" os vossos dados antes de começar a trabalhar seriamente com eles.

@@ -1,0 +1,119 @@
+---
+title: 'Sessão 3.5: Criação de Novas Variáveis'
+author: "Os vossos formadores"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Criação de Novas Variáveis (Colunas)
+A criação de novas variáveis, ou "feature engineering", é uma parte fundamental da ciência de dados. Permite-nos derivar novas informações a partir dos dados existentes, que podem ser mais úteis para a análise ou modelagem.
+Vamos usar o dataset mtcars para demonstrar.
+
+```{r}
+data(mtcars)
+head(mtcars)
+```
+
+## 1.1. Usando mutate() do dplyr
+Como vimos brevemente, a função `mutate()` do pacote dplyr é a ferramenta principal para criar ou modificar colunas.
+
+```{r}
+library(dplyr)
+```
+
+### 1.1.1. Cálculos Aritméticos Simples
+Podemos criar novas colunas com base em operações matemáticas entre colunas existentes.
+
+```{r}
+# Criar uma coluna 'cavalos_por_cilindro'
+mtcars_novas_vars <- mtcars %>%
+  mutate(cavalos_por_cilindro = hp / cyl)
+head(mtcars_novas_vars)
+
+# Criar uma coluna 'peso_em_kg' (1 lb = 0.453592 kg, mas 'wt' está em 1000 lbs)
+mtcars_novas_vars <- mtcars_novas_vars %>%
+  mutate(peso_em_kg = wt * 1000 * 0.453592)
+head(mtcars_novas_vars)
+```
+
+### 1.1.2. Funções Condicionais (ifelse())
+A função ifelse(condicao, valor_se_verdadeiro, valor_se_falso) é excelente para criar variáveis categóricas baseadas em condições.
+
+```{r}
+# Criar uma coluna 'eficiencia_combustivel' (alta/baixa) baseada no 'mpg'
+mtcars_novas_vars <- mtcars_novas_vars %>%
+  mutate(eficiencia_combustivel = ifelse(mpg > 20, "Alta", "Baixa"))
+head(mtcars_novas_vars)
+
+# Criar uma coluna 'potencia_categoria' (fraca/media/forte)
+mtcars_novas_vars <- mtcars_novas_vars %>%
+  mutate(potencia_categoria = case_when(
+    hp < 100 ~ "Fraca",
+    hp >= 100 & hp < 150 ~ "Média",
+    hp >= 150 ~ "Forte"
+  ))
+head(mtcars_novas_vars)
+```
+
+### 1.1.3. Funções de Texto
+Podemos manipular colunas de texto para criar novas.
+**Exemplo:** Se tivéssemos uma coluna de nomes completos e quiséssemos apenas o primeiro nome.
+
+```{r}
+# Criar um data frame de exemplo com nomes
+dados_nomes <- data.frame(
+  Nome_Completo = c("Maria Silva", "João Santos", "Ana Pereira")
+)
+
+# Extrair o primeiro nome
+dados_nomes <- dados_nomes %>%
+  mutate(Primeiro_Nome = sub(" .*", "", Nome_Completo)) # Remove tudo depois do primeiro espaço
+print(dados_nomes)
+```
+### 1.1.4. Funções de Data e Hora
+Se tivéssemos colunas de data, poderíamos extrair o ano, mês, dia, etc., ou calcular diferenças de tempo.
+
+```{r}
+# install.packages("lubridate") # Descomentem e executem se não tiverem
+library(lubridate)
+
+dados_datas <- data.frame(
+  Data_Nascimento = c("1990-05-15", "1995-11-20", "2000-01-01")
+)
+
+dados_datas <- dados_datas %>%
+  mutate(Data_Nascimento = ymd(Data_Nascimento)) %>% # Converter para formato de data
+  mutate(Ano_Nascimento = year(Data_Nascimento),
+         Mes_Nascimento = month(Data_Nascimento),
+         Dia_Nascimento = day(Data_Nascimento))
+print(dados_datas)
+
+# Calcular idade (aproximada)
+dados_datas <- dados_datas %>%
+  mutate(Idade_Atual = year(Sys.Date()) - Ano_Nascimento)
+print(dados_datas)
+```
+
+### 1.1.5. Múltiplas Novas Variáveis
+Podemos criar várias novas variáveis numa única chamada mutate().
+
+```{r}
+mtcars_multi_vars <- mtcars %>%
+  mutate(
+    litros_por_100km = 235.21 / mpg, # Converter mpg para L/100km
+    cilindros_categoria = as.factor(cyl), # Converter para fator
+    is_automatico = ifelse(am == 0, "Sim", "Não") # 0=automatic, 1=manual
+  )
+head(mtcars_multi_vars)
+str(mtcars_multi_vars)
+```
+
+**Parabéns!** Já sabem como criar novas variáveis nos vossos data frames! Esta é uma habilidade muito poderosa na ciência de dados.

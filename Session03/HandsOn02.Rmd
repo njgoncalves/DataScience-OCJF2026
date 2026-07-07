@@ -1,0 +1,62 @@
+---
+title: 'Sessão 3.2: Importação de Dados (Recap)'
+author: "Os vossos formadores"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Importação de Dados para o R (Recap)
+
+Como vimos na Sessão 2, o primeiro passo para qualquer análise é carregar os dados para o R.
+
+## 1.1. Ficheiros CSV
+Para ficheiros CSV (Comma Separated Values), usamos read.csv().
+
+```{r}
+# Para demonstração, vamos criar um CSV temporário
+dados_csv_temp <- "ID,Valor,Categoria
+1,10.5,A
+2,20.1,B
+3,15.7,A"
+writeLines(dados_csv_temp, "dados_temp.csv")
+
+# Ler o ficheiro CSV
+meus_dados <- read.csv("dados_temp.csv")
+head(meus_dados)
+```
+
+**Dica:** Se o separador for ponto e vírgula (comum em Portugal), use sep = ";".
+
+## 1.2. Ficheiros Excel
+Para ficheiros Excel (.xlsx, .xls), precisamos do pacote readxl.
+```{r eval=FALSE}
+# Instalem o pacote readxl (apenas uma vez)
+# install.packages("readxl")
+```
+
+```{r}
+# Carreguem o pacote readxl
+library(readxl)
+
+# Para demonstração, vamos criar um Excel temporário
+# install.packages("openxlsx") # Descomentem e executem se não tiverem
+library(openxlsx)
+dados_excel_temp <- data.frame(
+  Item = c("Maçã", "Pêra", "Uva"),
+  Quantidade = c(50, 30, 70)
+)
+write.xlsx(dados_excel_temp, "frutas_temp.xlsx")
+
+# Ler o ficheiro Excel
+minhas_frutas <- read_excel("frutas_temp.xlsx", sheet = 1)
+head(minhas_frutas)
+```
+**Lembrem-se:** Certifiquem-se de que os ficheiros estão no vosso diretório de trabalho ou forneçam o caminho completo para eles.

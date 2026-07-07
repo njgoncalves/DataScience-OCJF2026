@@ -1,0 +1,59 @@
+---
+title: "Sessão 6.1: Projeto Orientado - Aplicação de Conhecimentos"
+author: "Norberto Jorge Gonçalves"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Projeto Orientado: Aplicação de Conhecimentos
+
+Parabéns! Chegamos à última sessão do nosso programa de iniciação à Ciência de Dados. Esta sessão é dedicada à aplicação prática de todos os conhecimentos que adquiriram. Vão trabalhar num mini-projeto de análise de dados, desde a importação até à visualização e interpretação.
+
+## 1.1. O Objetivo do Projeto
+
+O objetivo é que, em pequenos grupos, escolham um dataset e apliquem o "Ciclo de Análise de Dados" para responder a algumas perguntas ou explorar padrões interessantes.
+
+## 1.2. Escolha do Dataset
+
+Podem escolher uma das seguintes opções:
+
+1.  **Dataset Incorporado no R:** Para simplificar, podem usar um dos datasets que já explorámos ou outro dataset incorporado no R (ex: `mtcars`, `iris`, `ToothGrowth`, `diamonds`, `faithful`).
+    * Para ver uma lista de datasets incorporados: `data()`
+    * Para carregar um dataset: `data(nome_do_dataset)`
+    * Para saber mais sobre um dataset: `?nome_do_dataset`
+2.  **O Vosso Próprio Dataset (Opcional):** Se tiverem um ficheiro CSV ou Excel de um tópico que vos interesse (ex: dados de jogos, desporto, redes sociais, etc.), podem usá-lo. **Certifiquem-se de que é um ficheiro simples e adequado para uma análise inicial.**
+
+**Sugestão:** Para este projeto, um dataset com cerca de 5-10 colunas e algumas centenas de linhas é ideal.
+
+## 1.3. O Ciclo de Análise de Dados (Revisão)
+
+Lembrem-se das etapas que percorremos:
+
+1.  **Definição do Problema/Perguntas:** O que querem descobrir com os dados? (Ex: Qual a relação entre X e Y? Qual a distribuição de Z? Existem diferenças entre os grupos A e B?).
+2.  **Importação de Dados:** Carregar o dataset para o R.
+3.  **Exploração Inicial:** Usar `head()`, `str()`, `summary()`, `dim()`, `colnames()` para ter uma primeira ideia dos dados.
+4.  **Limpeza e Manipulação de Dados:**
+    * Tratar valores em falta (`NA`).
+    * Criar novas variáveis (`mutate()`).
+    * Filtrar linhas (`filter()`).
+    * Selecionar colunas (`select()`).
+    * Agrupar e resumir (`group_by()`, `summarise()`).
+5.  **Análise Estatística Descritiva:**
+    * Calcular medidas de tendência central (média, mediana, moda).
+    * Calcular medidas de dispersão (desvio padrão, IQR).
+    * Criar tabelas de frequência.
+    * Calcular correlações.
+6.  **Visualização de Dados:** Criar gráficos relevantes (`ggplot2`) para ilustrar as vossas descobertas (barras, histogramas, dispersão, boxplots).
+7.  **Interpretação e Conclusões:** O que aprenderam com os dados? As vossas perguntas foram respondidas? Que *insights* podem partilhar?
+
+---
+
+**Boa sorte com o vosso projeto! É a vossa oportunidade de brilhar na Ciência de Dados!**

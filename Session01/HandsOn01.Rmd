@@ -1,0 +1,172 @@
+---
+title: "Hands-On: Primeiros Passos no R e R-Studio"
+author: "Norberto Jorge Gonçalves"
+date: "13 de Julho de 2026"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Bem-vindos ao R-Studio!
+
+Olá a todos! Sejam bem-vindos à vossa primeira experiência com o R e o R-Studio. Nesta sessão, vamos explorar o ambiente de trabalho e dar os primeiros passos com a linguagem R.
+
+## 1.1. O Ambiente do R-Studio
+
+Quando abrem o R-Studio, verão geralmente 4 painéis principais:
+
+-   **Painel Superior Esquerdo (Editor de Script/Notebook):** É onde escrevemos o nosso código. Podemos guardar este ficheiro para usar mais tarde.
+-   **Painel Inferior Esquerdo (Consola):** É onde os comandos R são executados e os resultados aparecem. Podem escrever comandos diretamente aqui, mas é melhor usar o editor de script.
+-   **Painel Superior Direito (Ambiente/Histórico):**
+    -   **Environment (Ambiente):** Mostra todos os objetos (variáveis, conjuntos de dados) que criaram na vossa sessão R.
+    -   **History (Histórico):** Lista os comandos que executaram.
+-   **Painel Inferior Direito (Ficheiros/Gráficos/Pacotes/Ajuda/Visualizador):**
+    -   **Files (Ficheiros):** Explora os ficheiros no vosso computador.
+    -   **Plots (Gráficos):** Onde os gráficos que criarem vão aparecer.
+    -   **Packages (Pacotes):** Lista os pacotes R instalados e permite gerir.
+    -   **Help (Ajuda):** Para procurar ajuda sobre funções R.
+    -   **Viewer (Visualizador):** Para ver conteúdos HTML locais.
+
+**Vamos explorar!** Cliquem nos diferentes separadores para verem o que está em cada painel.
+
+## 1.2. A Consola R: Onde a Magia Acontece
+
+A consola é o coração do R. É nela que o R executa as instruções que lhe damos. Podem escrever comandos diretamente na consola (aparece um `>`), mas para trabalhos mais complexos e que queremos guardar, usamos o editor de script (ou neste caso, o R Notebook!).
+
+Vamos experimentar um cálculo simples na consola:
+
+```{r}
+# Podem copiar este comando para a consola e pressionar Enter
+2 + 2
+```
+
+## 1.3. O Primeiro Código no R Notebook
+
+No R Notebook, o código é escrito em "chunks" (blocos) como este. Para executar um bloco, cliquem no botão verde de "play" (um triângulo) no canto superior direito do bloco, ou coloquem o cursor dentro do bloco e pressionem `Ctrl + Enter` (Windows/Linux) ou `Cmd + Enter` (Mac). Vamos escrever o nosso primeiro comando:
+
+```{r}
+# Este é um comentário. O R ignora tudo o que vem depois do #
+# Podemos usar comentários para explicar o nosso código.
+
+print("Olá, Mundo da Ciência de Dados!")
+```
+
+## 1.4. Conceitos Básicos de R
+
+### 1.4.1. Variáveis
+
+Variáveis são como caixas onde guardamos informações. Damos-lhes um nome e usamos o operador de atribuição `<-` (seta para a esquerda) ou `=` (sinal de igual) para guardar um valor. O `<-` é mais comum na comunidade R.
+
+Exemplos:
+
+```{r}
+# Criar uma variável numérica
+idade <- 17
+print(idade)
+
+# Criar uma variável de texto (caractere)
+nome <- "Ana Silva"
+print(nome)
+
+# Criar uma variável lógica (Verdadeiro/Falso)
+tem_animal_estimacao <- TRUE
+print(tem_animal_estimacao)
+
+# Podemos ver o tipo da variável
+class(idade)
+class(nome)
+class(tem_animal_estimacao)
+```
+
+Para onde foram as variáveis? Olhem para o painel "Environment" (Ambiente) no canto superior direito. Deviam ver idade, nome e tem_animal_estimacao listadas lá, com os seus valores.
+
+### 1.4.2. Operações Aritméticas Básicas
+
+O R pode ser usado como uma calculadora poderosa.
+
+```{r}
+# Adição
+resultado_soma <- 10 + 5
+print(resultado_soma)
+
+# Subtração
+resultado_subtracao <- 20 - 7
+print(resultado_subtracao)
+
+# Multiplicação
+resultado_multiplicacao <- 4 * 6
+print(resultado_multiplicacao)
+
+# Divisão
+resultado_divisao <- 100 / 4
+print(resultado_divisao)
+
+# Potenciação (elevado a)
+resultado_potencia <- 2^3 # 2 elevado a 3
+print(resultado_potencia)
+
+# Módulo (resto da divisão)
+resultado_modulo <- 17 %% 3 # 17 a dividir por 3, resto é 2
+print(resultado_modulo)
+```
+
+Podemos também combinar variáveis em operações:
+
+```{r}
+preco_unitario <- 25.50
+quantidade <- 3
+custo_total <- preco_unitario * quantidade
+print(custo_total)
+```
+
+## 1.5. Funções Básicas
+
+Funções são blocos de código pré-escritos que realizam uma tarefa específica. Usamo-las para não ter de escrever o mesmo código repetidamente. São chamadas pelo nome da função, seguidas de parênteses que podem conter argumentos (informação que a função precisa).
+
+Exemplos:
+
+```{r}
+# Função para calcular a raiz quadrada (sqrt = square root)
+raiz_de_16 <- sqrt(16)
+print(raiz_de_16)
+
+# Função para arredondar um número
+numero_decimal <- 3.14159
+numero_arredondado <- round(numero_decimal, digits = 2) # Arredondar para 2 casas decimais
+print(numero_arredondado)
+
+# Função para obter a data e hora atuais
+data_atual <- Sys.Date()
+print(data_atual)
+
+```
+
+Para saber o que uma função faz e como usá-la, podemos usar a ajuda do R. Basta colocar um `?` antes do nome da função e executar. Por exemplo, tentem `?print` na consola.
+
+## 1.6. Erros no R: Não Pânico!
+
+É perfeitamente normal cometer erros quando se está a programar. O R vai mostrar mensagens de erro quando algo corre mal. Exemplo de um erro comum:
+
+```         
+# Tentem executar este código. O que acontece?
+minha_variavel_errada = "Olá"
+print(minha_variavel) # Variável não existe!
+```
+
+O R dirá que o objeto 'minha_variavel' não foi encontrado. Isso significa que tentámos usar algo que não existe. Leiam sempre as mensagens de erro, elas dão pistas importantes!
+
+## 1.7. Guardar o Vosso Trabalho
+
+Lembrem-se de guardar o vosso R Notebook (`File > Save` ou `Ctrl + S`). O R Notebook será guardado como um ficheiro `.Rmd`.
+
+Para "correr" todo o R Notebook e ver os resultados, podem clicar no botão "Knit" na barra de ferramentas acima. Isto vai criar um ficheiro HTML com o vosso código e os resultados.
+
+------------------------------------------------------------------------
+
+Parabéns! Acabaram de dar os vossos primeiros passos no R e R-Studio!

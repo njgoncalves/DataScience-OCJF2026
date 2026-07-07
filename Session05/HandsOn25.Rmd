@@ -1,0 +1,119 @@
+---
+title: 'SessÃ£o 5.2: Tipos de GrÃ¡ficos Essenciais com ggplot2'
+author: "Norbreto Jorge GonÃ§alves"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Tipos de Gráficos Essenciais com ggplot2
+Nesta sessão, vamos explorar os tipos de gráficos mais comuns e úteis para a análise exploratória de dados, usando o ggplot2.
+```{r}
+library(ggplot2)
+# Usaremos o dataset mtcars e iris
+data(mtcars)
+data(iris)
+```
+
+1.1. Gráficos de Barras (geom_bar() ou geom_col())
+Os gráficos de barras são usados para visualizar a distribuição de variáveis categóricas.
+•	geom_bar(): Conta o número de observações em cada categoria (frequência).
+•	geom_col(): Requer uma coluna com os valores já contados (e.g., média, soma).
+Exemplo 1: Frequência de Cilindros (cyl) no mtcars
+A variável cyl é numérica, mas pode ser tratada como categórica para este gráfico.
+```{r}
+# Converter 'cyl' para fator para que o ggplot2 a trate como categórica
+mtcars$cyl_factor <- as.factor(mtcars$cyl)
+
+ggplot(data = mtcars, aes(x = cyl_factor)) +
+  geom_bar(fill = "steelblue") + # Preenche as barras com azul
+  labs(
+    title = "Contagem de Carros por Número de Cilindros",
+    x = "Número de Cilindros",
+    y = "Contagem de Carros"
+  )
+```
+
+Exemplo 2: Média de mpg por cyl (usando geom_col())
+Para mostrar uma estatística (como a média) por categoria, é melhor pré-calcular com dplyr e usar geom_col().
+```{r}
+library(dplyr) # Para usar group_by e summarise
+
+# Calcular a média de mpg por número de cilindros
+media_mpg_por_cyl <- mtcars %>%
+  group_by(cyl_factor) %>%
+  summarise(Media_MPG = mean(mpg))
+
+ggplot(data = media_mpg_por_cyl, aes(x = cyl_factor, y = Media_MPG)) +
+  geom_col(fill = "darkgreen") +
+  labs(
+    title = "Média de MPG por Número de Cilindros",
+    x = "Número de Cilindros",
+    y = "Média de Milhas por Galão (MPG)"
+  )
+```
+
+# 1.2. Histogramas (geom_histogram())
+Histogramas são usados para visualizar a distribuição de variáveis numéricas. Eles dividem os dados em "caixas" (bins) e contam quantas observações caem em cada caixa.
+Exemplo: Distribuição de Sepal.Length no iris
+
+
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length)) +
+  geom_histogram(binwidth = 0.5, fill = "purple", color = "black") + # binwidth define a largura das caixas
+  labs(
+    title = "Distribuição do Comprimento da Sépala",
+    x = "Comprimento da Sépala (cm)",
+    y = "Frequência"
+  )
+```
+Histograma com cores por categoria
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, fill = Species)) +
+  geom_histogram(binwidth = 0.5, color = "black", alpha = 0.7) + # alpha para transparência
+  labs(
+    title = "Distribuição do Comprimento da Sépala por Espécie",
+    x = "Comprimento da Sépala (cm)",
+    y = "Frequência",
+    fill = "Espécie"
+  )
+```
+## 1.3. Gráficos de Dispersão (Scatter Plots) (geom_point())
+Gráficos de dispersão são usados para visualizar a relação entre duas variáveis numéricas.
+Exemplo: hp vs mpg no mtcars
+```{r}
+ggplot(data = mtcars, aes(x = hp, y = mpg)) +
+  geom_point(color = "red", size = 3, alpha = 0.6) +
+  labs(
+    title = "Relação entre Cavalos de Potência e MPG",
+    x = "Cavalos de Potência (hp)",
+    y = "Milhas por Galão (mpg)"
+  )
+```
+Gráfico de Dispersão com cores e formas por categoria
+Podemos mapear variáveis categóricas para cor, tamanho ou forma dos pontos para adicionar mais dimensões à visualização.
+```{r}
+# Converter 'am' (transmissão) para fator
+mtcars$am_factor <- as.factor(mtcars$am)
+levels(mtcars$am_factor) <- c("Automática", "Manual") # Renomear níveis
+
+ggplot(data = mtcars, aes(x = hp, y = mpg, color = cyl_factor, shape = am_factor)) +
+  geom_point(size = 4, alpha = 0.8) +
+  labs(
+    title = "MPG vs HP por Cilindros e Tipo de Transmissão",
+    x = "Cavalos de Potência (hp)",
+    y = "Milhas por Galão (mpg)",
+    color = "Cilindros",
+    shape = "Transmissão"
+  )
+```
+________________________________________
+**Parabéns!** Já sabem como criar os gráficos essenciais para a exploração de dados!
+

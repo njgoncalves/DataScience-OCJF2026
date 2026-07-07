@@ -1,0 +1,96 @@
+---
+title: 'Sessão 3: Exercícios Práticos'
+author: "Os vossos formadores"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+# Exercícios Práticos: dplyr, NAs e Novas Variáveis
+
+Olá! Nesta sessão de exercícios, vamos consolidar os vossos conhecimentos sobre manipulação de dados com dplyr, tratamento de valores em falta e criação de novas variáveis.
+Vamos trabalhar com um dataset simulado de "Dados de Clientes".
+
+**Preparação:** Criar o Dataset de Exemplo
+Primeiro, vamos criar um ficheiro CSV de exemplo com alguns valores em falta para os exercícios. Certifiquem-se de que o vosso diretório de trabalho está correto ou que o RStudio Project está ativo.
+```{r}
+# Criar um data frame de exemplo com NAs
+dados_clientes <- data.frame(
+  ID_Cliente = 1001:1010,
+  Nome = c("Alice", "Bernardo", "Carla", "Diogo", "Eva", "Filipe", "Gabriela", "Hugo", "Inês", "Joana"),
+  Idade = c(25, 30, NA, 22, 35, 28, NA, 40, 27, 33),
+  Rendimento_Mensal = c(1500, 2200, 1800, 1400, NA, 2500, 1900, 3000, NA, 2100),
+  Genero = c("F", "M", "F", "M", "F", "M", "F", "M", "F", "M"),
+  Cidade = c("Lisboa", "Porto", "Coimbra", "Braga", "Lisboa", "Porto", "Coimbra", "Braga", "Lisboa", "Porto"),
+  Compras_Ultimos_6_Meses = c(5, 8, 3, 10, 6, 7, 4, 12, 9, 5)
+)
+
+# Introduzir alguns NAs adicionais para testar
+dados_clientes$Rendimento_Mensal[c(5, 9)] <- NA
+dados_clientes$Idade[3] <- NA
+
+# Guardar o data frame num ficheiro CSV
+write.csv(dados_clientes, "dados_clientes.csv", row.names = FALSE)
+
+print("Ficheiro 'dados_clientes.csv' criado na vossa pasta de trabalho.")
+```
+
+```{r}
+# Carregar o pacote dplyr
+library(dplyr)
+# Carregar o pacote tidyr (para drop_na e replace_na)
+library(tidyr)
+
+# Importar o dataset
+meus_clientes <- read.csv("dados_clientes.csv")
+head(meus_clientes)
+```
+
+## **Exercício 1:** Exploração e Identificação de NAs
+1.	**Explorar:** Obtenham um summary() e str() do meus_clientes.
+2.	**Contar NAs:** Quantos valores em falta existem em cada coluna (Idade e Rendimento_Mensal)?
+3.	**Linhas Completas:** Quantas linhas no data frame não têm NAs?
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 1
+```
+## **Exercício 2:** Tratamento de Valores em Falta
+1.	**Remover NAs:** Criem um novo data frame chamado clientes_sem_na que remova todas as linhas com valores em falta. Quantas linhas restaram?
+2.	**Imputar Idade:** Criem um novo data frame chamado clientes_imputado_idade onde os NAs na coluna Idade são substituídos pela média da Idade (ignorando os NAs para o cálculo da média).
+3.	**Imputar Rendimento:** No clientes_imputado_idade, substituam os NAs na coluna Rendimento_Mensal pela mediana do Rendimento_Mensal (ignorando os NAs para o cálculo da mediana). Chame o resultado final de clientes_limpo.
+```{r}
+# Escrevam o vosso código aqui para o Exercício 2
+```
+
+## **Exercício 3:** Criação de Novas Variáveis
+Continuem a trabalhar com o clientes_limpo (o data frame sem NAs e com imputação).
+
+1.	**Rendimento Anual:** Criem uma nova coluna chamada Rendimento_Anual que seja o Rendimento_Mensal multiplicado por 12.
+2.	**Categoria de Idade:** Criem uma nova coluna chamada Categoria_Idade com base na Idade:
+    * "Jovem" se Idade < 25
+    * "Adulto" se Idade >= 25 e Idade < 35
+    * "Senior" se Idade >= 35
+3.	**Frequência de Compra:** Criem uma nova coluna chamada Frequencia_Compra com base em Compras_Ultimos_6_Meses:
+    * "Baixa" se Compras_Ultimos_6_Meses <= 5
+    * "Média" se Compras_Ultimos_6_Meses > 5 e Compras_Ultimos_6_Meses <= 8
+    * "Alta" se Compras_Ultimos_6_Meses > 8
+```{r}
+# Escrevam o vosso código aqui para o Exercício 3
+```
+## **Exercício 4:** Agrupamento e Resumo com dplyr
+Continuem a trabalhar com o clientes_limpo (com as novas variáveis criadas).
+
+1.	Média de Idade por Género: Calculem a média da Idade para cada Genero.
+2.	Rendimento Médio por Cidade: Calculem o Rendimento_Mensal médio e o número de clientes (n()) para cada Cidade.
+3.	Resumo por Categoria de Idade e Género: Calculem o Rendimento_Anual médio e o número de clientes (n()) para cada combinação de Categoria_Idade e Genero. Ordenem os resultados pelo Rendimento_Anual médio em ordem decrescente.
+```{r}
+# Escrevam o vosso código aqui para o Exercício 4
+```
+
+**Parabéns!** Completaram os exercícios da Sessão 3!

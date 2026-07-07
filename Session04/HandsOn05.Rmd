@@ -1,0 +1,80 @@
+---
+title: 'Sessão 4: Exercícios Práticos'
+author: "Norberto Jorge Gonçalves"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# Exercícios Práticos: Estatística Descritiva e Correlação
+Olá! Nesta sessão de exercícios, vamos aplicar os conhecimentos sobre medidas de tendência central, dispersão, tabelas de frequência e correlação.
+Vamos usar o dataset ToothGrowth (incorporado no R) para estes exercícios. Este dataset contém dados sobre o crescimento de dentes de porquinhos-da-índia, medidos em função da dose de vitamina C e do método de entrega (sumo de laranja ou ácido ascórbico).
+
+```{r}
+# Carregar o dataset ToothGrowth
+data(ToothGrowth)
+head(ToothGrowth)
+str(ToothGrowth)
+summary(ToothGrowth)
+```
+
+Variáveis no dataset:
+* len: Comprimento do dente (numérico)
+* supp: Tipo de suplemento (VC = Vitamina C, OJ = Sumo de Laranja) (categórico/fator)
+* dose: Dose de vitamina C em mg (0.5, 1.0, 2.0) (numérico)
+
+## Exercício 1: Medidas de Tendência Central
+1.	Média e Mediana de len: Calculem a média e a mediana da variável len (comprimento do dente).
+2.	Média de len por supp: Calculem a média do comprimento do dente para cada tipo de suplemento (VC e OJ).
+–	Dica: Usem dplyr::group_by() e dplyr::summarise().
+3.	Moda de dose: Qual é a moda da variável dose? (Podem usar a função get_mode que criamos ou table()).
+
+```{r}
+library(dplyr) # Certifiquem-se que o dplyr está carregado
+
+# Função para a moda (copiem da lição se não tiverem)
+get_mode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+# Escrevam o vosso código aqui para o Exercício 1
+```
+
+## Exercício 2: Medidas de Dispersão
+
+1.	Amplitude de len: Calculem a amplitude (range) da variável len.
+2.	Desvio Padrão de len: Calculem o desvio padrão da variável len.
+3.	Variância de len por supp: Calculem a variância do comprimento do dente para cada tipo de suplemento (VC e OJ).
+4.	Intervalo Interquartil (IQR) de len por dose: Calculem o IQR do comprimento do dente para cada nível de dose.
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 2
+```
+## Exercício 3: Tabelas de Frequência
+
+1.	Frequência de supp: Criem uma tabela de frequência absoluta e relativa (em percentagem) para a variável supp.
+2.	Frequência de dose: Criem uma tabela de frequência absoluta para a variável dose.
+3.	Tabela Cruzada supp vs dose: Criem uma tabela de contingência que mostre a frequência de cada combinação de supp e dose.
+4.	Proporção por Linha: Nesa tabela cruzada, calculem as proporções por linha (qual a percentagem de cada dose para cada tipo de suplemento?).
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 3
+```
+
+## Exercício 4: Correlação
+1.	Correlação len vs dose: Calculem o coeficiente de correlação de Pearson entre len e dose. O que este valor sugere sobre a relação entre o comprimento do dente e a dose de vitamina C?
+2.	Gráfico de Dispersão: Criem um gráfico de dispersão para visualizar a relação entre len (eixo Y) e dose (eixo X). Adicionem títulos aos eixos e ao gráfico.
+3.	Interpretação: Com base no coeficiente de correlação e no gráfico, descrevam a relação entre len e dose.
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 4
+```
+Parabéns! Completaram os exercícios da Sessão 4!

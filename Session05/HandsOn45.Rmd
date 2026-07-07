@@ -1,0 +1,96 @@
+---
+title: "Sessão 5: Exercícios Práticos - Visualização de Dados com ggplot2"
+author: "Norberto Jorge Gonçalves"
+date: "6 de Julho de 2025"
+output: pdf_document
+---
+
+# Exercícios Práticos: Visualização de Dados com ggplot2
+
+Olá! Nesta sessão de exercícios, vamos aplicar tudo o que aprenderam sobre a criação de gráficos com ggplot2. O objetivo é criar visualizações informativas para explorar padrões e relações nos dados.
+Vamos usar o dataset diamonds (incorporado no R) para estes exercícios. Este dataset contém informações sobre quase 54.000 diamantes, incluindo preço, corte, cor, clareza e dimensões.
+
+```{r}
+# Carregar os pacotes necessários
+library(ggplot2)
+library(dplyr) # Para manipulação de dados, se necessário
+
+# Carregar o dataset diamonds
+data(diamonds)
+head(diamonds)
+str(diamonds)
+summary(diamonds)
+```
+
+Variáveis chave no dataset diamonds:
+
+* price: preço em dólares (numérico)
+* carat: peso do diamante (numérico)
+* cut: qualidade do corte (categórica: Fair, Good, Very Good, Premium, Ideal)
+* color: cor do diamante (categórica: de D (melhor) a J (pior))
+* clarity: clareza do diamante (categórica: de I1 (pior) a IF (melhor))
+* depth: profundidade total % (numérico)
+* table: largura do topo do diamante em relação ao ponto mais largo (numérico)
+* x, y, z: dimensões em mm (numéricas)
+
+## Exercício 1: Gráfico de Barras
+
+1.	Frequência de Corte: Criem um gráfico de barras que mostre a contagem de diamantes para cada categoria de cut.
+
+  * Usem geom_bar().
+  * Preencham as barras com uma cor à vossa escolha (ex: "skyblue").
+  * Adicionem um título adequado e rótulos aos eixos.
+  
+2.	Preço Médio por Cor: Calculem o preço médio (price) para cada color de diamante. Depois, criem um gráfico de barras (usando geom_col()) para visualizar estes preços médios.
+
+  * Ordenem as barras pela cor (de D a J, que já é a ordem padrão do fator).
+  * Adicionem um título e rótulos.
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 1
+```
+
+## Exercício 2: Histograma
+
+1.	Distribuição de Quilates: Criem um histograma para visualizar a distribuição da variável carat.
+
+  * Usem geom_histogram().
+  * Experimentem diferentes valores para binwidth (ex: 0.1, 0.25, 0.5) para ver como a visualização muda. Qual binwidth acham que mostra melhor a distribuição?
+  * Adicionem cor de preenchimento e contorno às barras.
+  * Adicionem um título e rótulos.
+  
+2.	Preço por Corte (Histograma com Facetas): Criem histogramas do price para cada categoria de cut.
+  * Usem facet_wrap(~ cut) para criar um gráfico separado para cada cut.
+  * Adicionem um título e rótulos.
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 2
+```
+
+## Exercício 3: Gráfico de Dispersão (Scatter Plot)
+
+1.	Preço vs Quilates: Criem um gráfico de dispersão para visualizar a relação entre carat (eixo X) e price (eixo Y).
+  * Usem geom_point().
+  * Adicionem transparência (alpha = 0.5) para gerir a sobreposição de pontos.
+  * Adicionem um título e rótulos.
+2.	Preço vs Quilates por Clareza: No gráfico anterior, mapeiem a color dos pontos à variável clarity.
+  * Adicionem uma linha de suavização (geom_smooth()) para mostrar a tendência geral.
+  * Adicionem um título e rótulos.
+```{r}
+# Escrevam o vosso código aqui para o Exercício 2
+```
+
+## Exercício 4: Boxplots
+
+1.	Preço por Qualidade de Corte: Criem um boxplot que mostre a distribuição do price para cada categoria de cut.
+o	Usem geom_boxplot().
+o	Mapeiem a cor de preenchimento (fill) à variável cut.
+o	Adicionem um título e rótulos.
+2.	Preço por Cor e Clareza (Boxplots com Facetas): Criem boxplots do price por color, e usem facet_wrap(~ clarity) para criar um gráfico separado para cada nível de clarity.
+o	Adicionem geom_jitter() com alpha = 0.2 para ver a densidade dos pontos.
+o	Adicionem um título e rótulos.
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 2
+```
+**Parabéns!** Completaram os exercícios da Sessão 5!

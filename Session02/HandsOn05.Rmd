@@ -1,0 +1,82 @@
+---
+title: 'Sessão 2: Exercícios Práticos'
+author: "Norberto Jorge Gonçalves"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# Exercícios Práticos: Importação, Exploração e Seleção de Dados
+
+Olá! Nesta sessão de exercícios, vamos aplicar os conhecimentos sobre estruturas de dados, importação, exploração inicial e seleção/filtragem de dados.
+Vamos trabalhar com um dataset simulado de "Resultados de Exames".
+
+## Preparação: Criar o Dataset de Exemplo
+Primeiro, vamos criar um ficheiro CSV de exemplo que vamos usar para os exercícios. 
+**Certifiquem-se de que o vosso diretório de trabalho está correto ou que o RStudio Project está ativo.**
+
+```{r}
+# Criar um data frame de exemplo
+dados_exame <- data.frame(
+  ID_Aluno = 101:110,
+  Nome = c("Ana", "Bruno", "Carla", "Diogo", "Eva", "Filipe", "Gabriela", "Hugo", "Inês", "Joana"),
+  Disciplina = c("Matemática", "Física", "Química", "Matemática", "Física", "Química",
+                 "Matemática", "Física", "Química", "Matemática"),
+  Nota = c(15, 12, 18, 10, 16, 14, 19, 11, 17, 13),
+  Aprovado = c(TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE),
+  Turma = c("A", "B", "A", "C", "B", "A", "C", "B", "A", "C")
+)
+
+# Guardar o data frame num ficheiro CSV
+# O argumento row.names = FALSE impede que o R escreva os números das linhas no CSV
+write.csv(dados_exame, "resultados_exames.csv", row.names = FALSE)
+
+print("Ficheiro 'resultados_exames.csv' criado na vossa pasta de trabalho.")
+```
+
+## Exercício 1: Importar e Explorar os Dados
+1.	Importar: Importem o ficheiro resultados_exames.csv para um data frame no R. Atribuam-lhe o nome meus_resultados.
+2.	Explorar head() e tail(): Visualizem as primeiras 3 e as últimas 2 linhas do data frame.
+3.	Explorar str(): Obtenham a estrutura do data frame. Quais são os tipos de dados de cada coluna?
+4.	Explorar summary(): Obtenham um resumo estatístico do data frame. Qual é a média da Nota? Quantos alunos estão em cada Disciplina?
+5.	Dimensões: Quantas linhas e colunas tem o data frame? (Usem dim(), nrow(), ncol()).
+6.	Nomes das Colunas: Listem os nomes de todas as colunas.
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 1
+```
+
+## Exercício 2: Seleção de Colunas
+1.	Selecionar uma coluna: Criem um novo vetor que contenha apenas os Nomes dos alunos.
+2.	Selecionar múltiplas colunas (por nome): Criem um novo data frame que contenha apenas as colunas Nome, Disciplina e Nota.
+3.	Selecionar múltiplas colunas (por índice): Criem um novo data frame que contenha a primeira, a terceira e a quarta coluna.
+```
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 2
+```
+
+## Exercício 3: Filtragem de Linhas
+1.	Alunos Aprovados: Criem um novo data frame chamado aprovados que contenha apenas os alunos que Aprovado é TRUE.
+2.	Notas Altas: Criem um novo data frame chamado notas_altas que contenha os alunos com Nota superior a 15.
+3.	Alunos de Matemática: Criem um novo data frame chamado matematica_alunos que contenha apenas os alunos da Disciplina "Matemática".
+4.	Alunos Reprovados de Física: Criem um data frame que contenha os alunos que Aprovado é FALSE E que a Disciplina é "Física".
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 3
+```
+
+## Exercício 4: Combinar Seleção e Filtragem
+1.	Nomes e Notas dos Aprovados: Criem um data frame que mostre apenas os Nomes e as Notas dos alunos que foram Aprovados.
+2.	ID e Disciplina das Notas Baixas: Criem um data frame que mostre o ID_Aluno e a Disciplina dos alunos com Nota inferior ou igual a 10.
+3.	Alunos da Turma 'A' ou 'C': Criem um data frame que contenha todos os dados dos alunos que estão na Turma "A" OU na Turma "C". Usem o operador %in%.
+
+```{r}
+# Escrevam o vosso código aqui para o Exercício 4

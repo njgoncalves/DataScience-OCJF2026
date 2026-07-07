@@ -1,0 +1,117 @@
+---
+title: 'Sessão 2.4: Seleção e Filtragem de Dados'
+author: "Norberto Jorge Gonçalves"
+date: "6 de Julho de 2025"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+# 1. Seleção e Filtragem de Dados
+Depois de explorar os dados, muitas vezes precisamos de selecionar apenas as colunas (variáveis) ou as linhas (observações) que nos interessam para uma análise específica. Nesta sessão, vamos aprender as formas básicas de fazer isso em R.
+Vamos continuar a usar o dataset `iris`.
+
+```{r}
+# Carregar o dataset iris
+data(iris)
+head(iris)
+```
+## 1.1. Selecionar Colunas
+Existem várias formas de selecionar colunas de um data frame.
+
+### 1.1.1. Usando $ (para uma única coluna)
+Esta é a forma mais comum e simples para aceder a uma única coluna.
+
+```{r}
+# Selecionar a coluna 'Sepal.Length'
+comprimento_sepala <- iris$Sepal.Length
+print(head(comprimento_sepala))
+class(comprimento_sepala) # Note que o resultado é um vetor
+```
+
+### 1.1.2. Usando [ ] com o nome da coluna (para uma ou múltiplas colunas)
+Podemos usar colchetes [linha, coluna] para selecionar. Se deixarmos a parte da linha vazia, selecionamos todas as linhas.
+
+```{r}
+# Selecionar uma única coluna pelo nome (o resultado ainda é um data frame)
+comprimento_sepala_df <- iris["Sepal.Length"]
+print(head(comprimento_sepala_df))
+class(comprimento_sepala_df) # Note que o resultado é um data frame
+
+# Selecionar múltiplas colunas usando um vetor de nomes
+medidas_petala <- iris[ , c("Petal.Length", "Petal.Width")]
+print(head(medidas_petala))
+```
+
+### 1.1.3. Usando [ ] com o índice da coluna
+Podemos também selecionar colunas pela sua posição numérica.
+
+```{r}
+# Selecionar a primeira coluna
+primeira_coluna <- iris[ , 1]
+print(head(primeira_coluna))
+
+# Selecionar a primeira e a quinta coluna
+primeira_e_quinta <- iris[ , c(1, 5)]
+print(head(primeira_e_quinta))
+```
+
+## 1.2. Filtrar Linhas (Seleção de Observações)
+
+Para filtrar linhas, usamos os colchetes [linha, coluna] e colocamos uma condição lógica na parte da linha. A condição deve resultar num vetor de TRUE ou FALSE para cada linha.
+
+### 1.2.1. Filtrar por uma condição numérica
+
+```{r}
+# Selecionar flores onde o Sepal.Length é maior que 7.0
+flores_grandes <- iris[iris$Sepal.Length > 7.0, ]
+print(head(flores_grandes))
+nrow(flores_grandes) # Quantas flores selecionamos?
+```
+
+### 1.2.2. Filtrar por uma condição de texto/categórica
+```{r}
+# Selecionar apenas as flores da espécie "setosa"
+setosa_flores <- iris[iris$Species == "setosa", ]
+print(head(setosa_flores))
+nrow(setosa_flores) # Deviam ser 50
+```
+### 1.2.3. Combinar Múltiplas Condições
+Podemos usar operadores lógicos para combinar condições:
+*	& (AND): Ambas as condições devem ser verdadeiras.
+*	| (OR): Pelo menos uma das condições deve ser verdadeira.
+
+```{r}
+# Selecionar flores da espécie "virginica" E com Petal.Length maior que 6.0
+virginica_longa_petala <- iris[iris$Species == "virginica" & iris$Petal.Length > 6.0, ]
+print(head(virginica_longa_petala))
+nrow(virginica_longa_petala)
+
+# Selecionar flores da espécie "setosa" OU "versicolor"
+setosa_ou_versicolor <- iris[iris$Species == "setosa" | iris$Species == "versicolor", ]
+print(head(setosa_ou_versicolor))
+nrow(setosa_ou_versicolor) # Deviam ser 100
+```
+
+### 1.2.4. Usando %in% para Múltiplas Categorias
+Quando queremos filtrar por várias categorias de uma só vez, == pode ser repetitivo. O operador %in% é muito útil.
+```{r}
+# Selecionar flores da espécie "setosa" ou "versicolor" (forma mais elegante)
+setosa_ou_versicolor_in <- iris[iris$Species %in% c("setosa", "versicolor"), ]
+print(head(setosa_ou_versicolor_in))
+nrow(setosa_ou_versicolor_in)
+```
+
+## 1.3. Selecionar Colunas e filtrar Linhas
+Podemos combinar a seleção de colunas e a filtragem de linhas na mesma operação.
+
+```{r}
+# Selecionar apenas as colunas 'Sepal.Length' e 'Species' para flores da espécie "virginica"
+virginica_selecionado <- iris[iris$Species == "virginica", c("Sepal.Length", "Species")]
+print(head(virginica_selecionado))

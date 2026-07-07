@@ -1,0 +1,36 @@
+---
+title: "Hands-On 02: Exercícios Práticos"
+author: "Norberto Jorge Gonçalves"
+date: "13 de Julho de 2026"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+---
+
+### Hands-On 02: R Notebook de Exercícios Práticos
+
+Este R Notebook contém alguns exercícios para os alunos consolidarem os conhecimentos da primeira sessão.
+
+# Exercícios Práticos: Fundamentos de R
+
+Olá! Chegou a hora de porem em prática o que aprenderam. Nestes exercícios, vão aplicar os conceitos de variáveis, operações e funções básicas em R.
+
+Lembrem-se de executar cada bloco de código para verem os resultados. Se tiverem dúvidas ou cometerem erros, não hesitem em perguntar!
+
+------------------------------------------------------------------------
+
+## Exercício 1: Criar e Exibir Variáveis
+
+Crie as seguintes variáveis e imprima os seus valores na consola:
+
+1.  Uma variável chamada `ano_atual` com o valor do ano corrente.
+2.  Uma variável chamada `cidade_origem` com o nome da vossa cidade.
+3.  Uma variável chamada `e_estudante` que seja `TRUE` (se forem estudantes) ou `FALSE` (se não forem).
+
+\`\`\`{r} \# Escrevam o vosso código aqui para o Exercício 1
