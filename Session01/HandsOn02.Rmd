@@ -33,4 +33,6 @@ Crie as seguintes variáveis e imprima os seus valores na consola:
 2.  Uma variável chamada `cidade_origem` com o nome da vossa cidade.
 3.  Uma variável chamada `e_estudante` que seja `TRUE` (se forem estudantes) ou `FALSE` (se não forem).
 
-\`\`\`{r} \# Escrevam o vosso código aqui para o Exercício 1
+```{r}
+# Escrevam o vosso código aqui para o Exercício 1
+```

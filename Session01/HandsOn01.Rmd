@@ -3,14 +3,14 @@ title: "Hands-On: Primeiros Passos no R e R-Studio"
 author: "Norberto Jorge Gonçalves"
 date: "13 de Julho de 2026"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
   html_document:
     df_print: paged
     toc: yes
     toc_depth: 3
     toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
 ---
 
 # 1. Bem-vindos ao R-Studio!
@@ -21,17 +21,17 @@ Olá a todos! Sejam bem-vindos à vossa primeira experiência com o R e o R-Stud
 
 Quando abrem o R-Studio, verão geralmente 4 painéis principais:
 
--   **Painel Superior Esquerdo (Editor de Script/Notebook):** É onde escrevemos o nosso código. Podemos guardar este ficheiro para usar mais tarde.
--   **Painel Inferior Esquerdo (Consola):** É onde os comandos R são executados e os resultados aparecem. Podem escrever comandos diretamente aqui, mas é melhor usar o editor de script.
--   **Painel Superior Direito (Ambiente/Histórico):**
-    -   **Environment (Ambiente):** Mostra todos os objetos (variáveis, conjuntos de dados) que criaram na vossa sessão R.
-    -   **History (Histórico):** Lista os comandos que executaram.
--   **Painel Inferior Direito (Ficheiros/Gráficos/Pacotes/Ajuda/Visualizador):**
-    -   **Files (Ficheiros):** Explora os ficheiros no vosso computador.
-    -   **Plots (Gráficos):** Onde os gráficos que criarem vão aparecer.
-    -   **Packages (Pacotes):** Lista os pacotes R instalados e permite gerir.
-    -   **Help (Ajuda):** Para procurar ajuda sobre funções R.
-    -   **Viewer (Visualizador):** Para ver conteúdos HTML locais.
+- **Painel Superior Esquerdo (Editor de Script/Notebook):** É onde escrevemos o nosso código. Podemos guardar este ficheiro para usar mais tarde.
+- **Painel Inferior Esquerdo (Consola):** É onde os comandos R são executados e os resultados aparecem. Podem escrever comandos diretamente aqui, mas é melhor usar o editor de script.
+- **Painel Superior Direito (Ambiente/Histórico):**
+  - **Environment (Ambiente):** Mostra todos os objetos (variáveis, conjuntos de dados) que criaram na vossa sessão R.
+  - **History (Histórico):** Lista os comandos que executaram.
+- **Painel Inferior Direito (Ficheiros/Gráficos/Pacotes/Ajuda/Visualizador):**
+  - **Files (Ficheiros):** Explora os ficheiros no vosso computador.
+  - **Plots (Gráficos):** Onde os gráficos que criarem vão aparecer.
+  - **Packages (Pacotes):** Lista os pacotes R instalados e permite gerir.
+  - **Help (Ajuda):** Para procurar ajuda sobre funções R.
+  - **Viewer (Visualizador):** Para ver conteúdos HTML locais.
 
 **Vamos explorar!** Cliquem nos diferentes separadores para verem o que está em cada painel.
 
@@ -70,7 +70,7 @@ Exemplos:
 idade <- 17
 print(idade)
 
-# Criar uma variável de texto (caractere)
+# Criar uma variável de texto (caracteres)
 nome <- "Ana Silva"
 print(nome)
 
@@ -149,7 +149,7 @@ print(data_atual)
 
 Para saber o que uma função faz e como usá-la, podemos usar a ajuda do R. Basta colocar um `?` antes do nome da função e executar. Por exemplo, tentem `?print` na consola.
 
-## 1.6. Erros no R: Não Pânico!
+## 1.6. Erros no R: Sem Pânico!
 
 É perfeitamente normal cometer erros quando se está a programar. O R vai mostrar mensagens de erro quando algo corre mal. Exemplo de um erro comum:
 

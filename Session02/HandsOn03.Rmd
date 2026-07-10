@@ -1,7 +1,7 @@
 ---
 title: 'Sessão 2.3: Exploração Inicial dos Dados"
 author: "Norberto Jorge Gonçalves'
-date: "6 de Julho de 2025"
+date: "13 de julho de 2026"
 output:
   html_document:
     df_print: paged
@@ -11,9 +11,15 @@ output:
   pdf_document:
     toc: yes
     toc_depth: '3'
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
+
 ## 1. Exploração Inicial dos Dados
-Depois de importar os dados para o R, o próximo passo crucial é explorá-los. Isto ajuda-nos a entender a sua estrutura, conteúdo e a identificar potenciais problemas antes de qualquer análise aprofundada.
+
+Depois de importar os dados para o R, o próximo passo crucial é explorá-los.
+Isto ajuda-nos a entender a sua estrutura, conteúdo e a identificar potenciais problemas antes de qualquer análise aprofundada.
 Vamos usar um conjunto de dados de exemplo incorporado no R, o `iris` dataset, que contém medições de diferentes espécies de flores.
 
 ```{r}
@@ -23,10 +29,11 @@ data(iris)
 # Visualizar as primeiras 6 linhas do dataset
 head(iris)
 ```
+
 ## 1.1. head() e tail(): Ver o Início e o Fim
-* `head(dataset)`: Mostra as primeiras 6 linhas do data frame.
-* `tail(dataset)`: Mostra as últimas 6 linhas do data frame.
-Estas funções são ótimas para ter uma ideia rápida de como os dados estão organizados.
+
+- `head(dataset)`: Mostra as primeiras 6 linhas do data frame.
+- `tail(dataset)`: Mostra as últimas 6 linhas do data frame. Estas funções são ótimas para ter uma ideia rápida de como os dados estão organizados.
 
 ```{r}
 # Ver as primeiras 10 linhas
@@ -37,44 +44,49 @@ tail(iris, n = 3)
 ```
 
 ## 1.2. str(): Estrutura do Objeto
-A função `str()` (de "structure") é uma das mais úteis. Ela mostra a estrutura interna de um objeto R, incluindo:
-* O tipo de objeto (ex: `data.frame`).
-*	O número de observações (linhas) e variáveis (colunas).
-*	Os nomes das colunas.
-*	O tipo de dados de cada coluna (numérico, fator, etc.).
-*	Alguns valores de exemplo de cada coluna.
+
+A função `str()` (de "structure") é uma das mais úteis.
+Ela mostra a estrutura interna de um objeto R, incluindo: \* O tipo de objeto (ex: `data.frame`).
+\* O número de observações (linhas) e variáveis (colunas).
+\* Os nomes das colunas.
+\* O tipo de dados de cada coluna (numérico, fator, etc.).
+\* Alguns valores de exemplo de cada coluna.
 
 ```{r}
 str(iris)
 ```
-Interpretação:
-*	'data.frame': 150 obs. of 5 variables: significa que temos 150 linhas e 5 colunas.
-*	$ Sepal.Length: num indica que a coluna Sepal.Length é numérica.
-*	$ Species   : Factor w/ 3 levels indica que Species é um fator (variável categórica) com 3 níveis (as diferentes espécies de flores).
 
-##  1.3. summary(): Resumo Estatístico
-A função summary() fornece um resumo estatístico para cada coluna do data frame:
-*	Para colunas numéricas: Mínimo, 1º Quartil, Mediana, Média, 3º Quartil, Máximo.
-*	Para colunas categóricas (fatores): Contagem de cada nível.
+Interpretação: \* 'data.frame': 150 obs.
+of 5 variables: significa que temos 150 linhas e 5 colunas.
+\* \$ Sepal.Length: num indica que a coluna Sepal.Length é numérica.
+\* \$ Species : Factor w/ 3 levels indica que Species é um fator (variável categórica) com 3 níveis (as diferentes espécies de flores).
+
+## 1.3. summary(): Resumo Estatístico
+
+A função summary() fornece um resumo estatístico para cada coluna do data frame: \* Para colunas numéricas: Mínimo, 1º Quartil, Mediana, Média, 3º Quartil, Máximo.
+\* Para colunas categóricas (fatores): Contagem de cada nível.
 
 ```{r}
 summary(iris)
 ```
 
-**Interpretação:**
-*	Para Sepal.Length, vemos as principais medidas de tendência central e dispersão.
-*	Para Species, vemos que há 50 observações de cada uma das três espécies.
+**Interpretação:** \* Para Sepal.Length, vemos as principais medidas de tendência central e dispersão.
+\* Para Species, vemos que há 50 observações de cada uma das três espécies.
 
 ## 1.4. dim(): Dimensões do Data Frame
+
 A função dim() retorna um vetor com o número de linhas e o número de colunas do data frame.
+
 ```{r}
 dim(iris)
 # O primeiro número é o número de linhas, o segundo é o número de colunas.
 ```
 
 ## 1.5. colnames() e names(): Nomes das Colunas
-*	colnames(dataset): Retorna um vetor com os nomes das colunas.
-*	names(dataset): Faz o mesmo que colnames() para data frames.
+
+- colnames(dataset): Retorna um vetor com os nomes das colunas.
+- names(dataset): Faz o mesmo que colnames() para data frames.
+
 ```{r}
 colnames(iris)
 names(iris)
@@ -85,8 +97,9 @@ names(iris)
 ```
 
 ## 1.6. nrow() e ncol(): Número de Linhas e Colunas
-*	nrow(dataset): Retorna o número de linhas.
-*	ncol(dataset): Retorna o número de colunas.
+
+- nrow(dataset): Retorna o número de linhas.
+- ncol(dataset): Retorna o número de colunas.
 
 ```{r}
 nrow(iris)

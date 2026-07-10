@@ -1,7 +1,7 @@
 ---
 title: 'Sessão 4.2: Medidas de Dispersão'
 author: "Norberto Jorge Gonçalves"
-date: "6 de Julho de 2025"
+date: "13 de julho de 2026"
 output:
   pdf_document:
     toc: yes
@@ -11,10 +11,17 @@ output:
     toc: yes
     toc_depth: 3
     toc_float: yes
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
+
 # 1. Medidas de Dispersão
-As medidas de dispersão (ou variabilidade) indicam o quão espalhados os dados estão em relação ao seu centro. São tão importantes quanto as medidas de tendência central, pois dois conjuntos de dados podem ter a mesma média, mas dispersões muito diferentes.
+
+As medidas de dispersão (ou variabilidade) indicam o quão espalhados os dados estão em relação ao seu centro.
+São tão importantes quanto as medidas de tendência central, pois dois conjuntos de dados podem ter a mesma média, mas dispersões muito diferentes.
 Vamos usar o dataset `iris` novamente.
+
 ```{r}
 # Carregar o dataset iris
 data(iris)
@@ -22,8 +29,11 @@ head(iris)
 ```
 
 ## 1.1. Amplitude (Range)
-A amplitude é a diferença entre o valor máximo e o valor mínimo de um conjunto de dados. É a medida de dispersão mais simples, mas é muito sensível a outliers.
+
+A amplitude é a diferença entre o valor máximo e o valor mínimo de um conjunto de dados.
+É a medida de dispersão mais simples, mas é muito sensível a outliers.
 Função em R: `range()` (retorna min e max) e `diff(range())` para a amplitude.
+
 ```{r}
 # Amplitude do Sepal.Length
 amplitude_sepal_length <- diff(range(iris$Sepal.Length))
@@ -36,8 +46,11 @@ print(paste("Máximo Sepal.Length:", min_max_sepal_length[2]))
 ```
 
 ## 1.2. Variância (Variance)
-A variância mede a dispersão média dos pontos de dados em relação à média. É calculada como a média dos quadrados das diferenças de cada valor em relação à média.
+
+A variância mede a dispersão média dos pontos de dados em relação à média.
+É calculada como a média dos quadrados das diferenças de cada valor em relação à média.
 Função em R: `var()`
+
 ```{r}
 # Variância do Sepal.Length
 variancia_sepal_length <- var(iris$Sepal.Length)
@@ -49,8 +62,11 @@ var(dados_com_na, na.rm = TRUE)
 ```
 
 ## 1.3. Desvio Padrão (Standard Deviation)
-O desvio padrão é a raiz quadrada da variância. É a medida de dispersão mais utilizada, pois está na mesma unidade de medida dos dados originais, tornando-a mais fácil de interpretar do que a variância.
+
+O desvio padrão é a raiz quadrada da variância.
+É a medida de dispersão mais utilizada, pois está na mesma unidade de medida dos dados originais, tornando-a mais fácil de interpretar do que a variância.
 Função em R: `sd()`
+
 ```{r}
 # Desvio Padrão do Sepal.Length
 desvio_padrao_sepal_length <- sd(iris$Sepal.Length)
@@ -61,12 +77,15 @@ sd(dados_com_na, na.rm = TRUE)
 ```
 
 ## 1.4. Quartis e Intervalo Interquartil (IQR)
+
 Os quartis dividem um conjunto de dados ordenado em quatro partes iguais.
-* **1º Quartil (Q1):** 25% dos dados estão abaixo deste valor.
-* **2º Quartil (Q2):** É a mediana (50% dos dados estão abaixo).
-* **3º Quartil (Q3):** 75% dos dados estão abaixo deste valor.
-O Intervalo Interquartil (IQR) é a diferença entre o 3º Quartil e o 1º Quartil (IQR = Q3 - Q1). Ele representa a amplitude dos 50% centrais dos dados, sendo menos afetado por outliers do que a amplitude total.
+\* **1º Quartil (Q1):** 25% dos dados estão abaixo deste valor.
+\* **2º Quartil (Q2):** É a mediana (50% dos dados estão abaixo).
+\* **3º Quartil (Q3):** 75% dos dados estão abaixo deste valor.
+O Intervalo Interquartil (IQR) é a diferença entre o 3º Quartil e o 1º Quartil (IQR = Q3 - Q1).
+Ele representa a amplitude dos 50% centrais dos dados, sendo menos afetado por outliers do que a amplitude total.
 Funções em R: `quantile()` e `IQR()`
+
 ```{r}
 # Quartis do Sepal.Length
 quartis_sepal_length <- quantile(iris$Sepal.Length)
@@ -82,8 +101,11 @@ quantile(iris$Sepal.Length, probs = c(0.10, 0.90)) # 10º e 90º percentil
 ```
 
 ## 1.5. Resumo Geral (summary())
+
 A função summary() que já vimos na Sessão 2 é excelente porque fornece várias destas medidas de uma só vez para cada variável numérica (Mínimo, Q1, Mediana, Média, Q3, Máximo).
+
 ```{r}
 summary(iris$Sepal.Length)
 ```
+
 **Parabéns!** Já dominam as medidas de dispersão!

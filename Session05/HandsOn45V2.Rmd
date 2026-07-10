@@ -1,5 +1,7 @@
 ---
-title: "R Notebook"
+title: "Sessão 5: Exercícios Práticos - Visualização de Dados com ggplot2"
+author: "Norberto Jorge Gonçalves"
+date: "13 de julho de 2026"
 output:
   html_document:
     df_print: paged

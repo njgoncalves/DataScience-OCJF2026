@@ -1,7 +1,7 @@
 ---
 title: 'Sessão 3.2: Importação de Dados (Recap)'
 author: "Os vossos formadores"
-date: "6 de Julho de 2025"
+date: "13 de julho de 2026"
 output:
   pdf_document:
     toc: yes

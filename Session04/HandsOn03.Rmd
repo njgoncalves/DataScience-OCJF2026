@@ -1,7 +1,7 @@
 ---
 title: 'Sessão 4.3: Tabelas de Frequência'
 author: "Norberto Jorge Gonçalves"
-date: "6 de Julho de 2025"
+date: "31 de julho de 2026"
 output:
   pdf_document:
     toc: yes
@@ -13,9 +13,9 @@ output:
     toc_float: yes
 ---
 
-#1. Tabelas de Frequência: Análise de Variáveis Categóricas
-As tabelas de frequência são ferramentas essenciais para resumir e entender a distribuição de variáveis categóricas (qualitativas). Elas mostram quantas vezes cada categoria aparece num conjunto de dados.
-Vamos usar o dataset mtcars e o dataset iris para demonstrar.
+# 1. Tabelas de Frequência: Análise de Variáveis Categóricas
+
+As tabelas de frequência são ferramentas essenciais para resumir e entender a distribuição de variáveis categóricas (qualitativas). Elas mostram quantas vezes cada categoria aparece num conjunto de dados. Vamos usar o dataset mtcars e o dataset iris para demonstrar.
 
 ```{r}
 # Carregar os datasets
@@ -26,28 +26,32 @@ data(iris)
 head(mtcars)
 head(iris)
 ```
+
 ## 1.1. Frequência Absoluta (table())
+
 A função table() é a forma mais simples de criar uma tabela de frequência absoluta, que conta o número de ocorrências de cada categoria.
 
-**Exemplo 1:** Coluna cyl (cilindros) do `mtcars`
-A coluna cyl indica o número de cilindros do motor.
+**Exemplo 1:** Coluna cyl (cilindros) do `mtcars` A coluna cyl indica o número de cilindros do motor.
 
- ```{r}
+```{r}
 # Tabela de frequência absoluta para 'cyl'
 frequencia_cyl <- table(mtcars$cyl)
 print(frequencia_cyl)
 ```
-**Exemplo 2:** Coluna Species (espécie) do iris
-A coluna Species indica a espécie da flor.
- ```{r}
+
+**Exemplo 2:** Coluna Species (espécie) do iris A coluna Species indica a espécie da flor.
+
+```{r}
 # Tabela de frequência absoluta para 'Species'
 frequencia_species <- table(iris$Species)
 print(frequencia_species)
 ```
+
 ## 1.2. Frequência Relativa (Proporções/Percentagens)
+
 Para obter a frequência relativa (proporção ou percentagem), podemos dividir a tabela de frequência absoluta pelo número total de observações, ou usar a função `prop.table()`.
 
- ```{r}
+```{r}
 # Frequência relativa para 'cyl'
 frequencia_relativa_cyl <- prop.table(frequencia_cyl)
 print(frequencia_relativa_cyl)
@@ -56,12 +60,14 @@ print(frequencia_relativa_cyl)
 frequencia_percentagem_cyl <- prop.table(frequencia_cyl) * 100
 print(round(frequencia_percentagem_cyl, 2)) # Arredondar para 2 casas decimais
 ```
+
 ## 1.3. Tabelas de Frequência Cruzada (Duas Variáveis Categóricas)
+
 Podemos usar `table()` com duas variáveis para criar uma tabela de contingência, que mostra a frequência conjunta de duas variáveis categóricas.
 
 **Exemplo:** cyl vs am (transmissão: 0 = automática, 1 = manual) do mtcars
 
- ```{r}
+```{r}
 # Tabela de frequência cruzada
 frequencia_cruzada_cyl_am <- table(mtcars$cyl, mtcars$am)
 print(frequencia_cruzada_cyl_am)
@@ -71,14 +77,14 @@ colnames(frequencia_cruzada_cyl_am) <- c("Automática", "Manual")
 rownames(frequencia_cruzada_cyl_am) <- c("4 Cilindros", "6 Cilindros", "8 Cilindros")
 print(frequencia_cruzada_cyl_am)
 ```
-Frequências Relativas em Tabelas Cruzadas
-Podemos usar prop.table() com tabelas cruzadas para obter proporções:
 
-* prop.table(tabela): Proporção do total geral.
-* prop.table(tabela, 1): Proporção por linha (soma das linhas = 1).
-* prop.table(tabela, 2): Proporção por coluna (soma das colunas = 1).
+Frequências Relativas em Tabelas Cruzadas Podemos usar prop.table() com tabelas cruzadas para obter proporções:
 
- ```{r}
+- prop.table(tabela): Proporção do total geral.
+- prop.table(tabela, 1): Proporção por linha (soma das linhas = 1).
+- prop.table(tabela, 2): Proporção por coluna (soma das colunas = 1).
+
+```{r}
 # Proporção do total geral
 prop.table(frequencia_cruzada_cyl_am)
 
@@ -88,9 +94,12 @@ prop.table(frequencia_cruzada_cyl_am, 1) * 100
 # Proporção por coluna (percentagem de cada número de cilindros por tipo de transmissão)
 prop.table(frequencia_cruzada_cyl_am, 2) * 100
 ```
+
 ## 1.4. Usando dplyr para Tabelas de Frequência
+
 Com o dplyr, podemos usar group_by() e summarise() para criar tabelas de frequência de forma mais flexível.
- ```{r}
+
+```{r}
 library(dplyr)
 
 # Frequência de Species com dplyr
